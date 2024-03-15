@@ -1,0 +1,61 @@
+@import 'reset';
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+html {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+body {
+    min-height: 100vh;
+    background-color: #08070B;
+}
+
+@mixin thumbStyle {
+    -webkit-appearance: none;
+    height: 24px;
+    width: 24px;
+    border-radius: 100%;
+    border: 2px solid #E6E5EA;
+    background-color: #E6E5EA;
+    cursor: pointer;
+    &:hover {
+        border-color: #A4FFAF;
+        background-color: #18171F;
+    }
+}
+
+@mixin trackStyle {
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(
+        to right,
+        #A4FFAF 0%,
+        #A4FFAF calc(var(--thumb-position) * 1%),
+        #18171F calc(var(--thumb-position) * 1%),
+        #18171F 100%);
+    cursor: pointer;
+}
+
+input[type='range'] {
+    -webkit-appearance: none;
+    width: 100%;
+    background: transparent;
+    // Style thumb for Webkit
+    &::-webkit-slider-thumb {
+        @include thumbStyle;
+        margin-top: -8px;
+    }
+    // Style thumb for Firefox
+    &::-moz-range-thumb {
+        @include thumbStyle;
+    }
+    // Style track for Webkit
+    &::-webkit-slider-runnable-track {
+        @include trackStyle;
+    }
+    // Style track for Firefox
+    &::-moz-range-track {
+        @include trackStyle;
+    }
+}
+
