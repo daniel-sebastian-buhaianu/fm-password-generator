@@ -17,7 +17,124 @@ document.querySelectorAll('form input[type="checkbox"]')
 document.querySelector('form')
         .addEventListener('submit', function(event) {
             event.preventDefault();
+            const password = generatePassword();
+            console.log(password);
         });
+
+function generatePassword() {
+    let asciiCodes = getASCIICodesFor('lowercaseLetters');
+
+    const requirements = {
+        includeUppercaseLetters: false,
+        includeNumbers: false,
+        includeSpecialCharacters: false
+    };
+
+    document.querySelectorAll('form input[type="checkbox"]')
+            .forEach(input => {
+                if (input.checked) {
+                    switch(true) {
+                        case input.id.includes('Uppercase'):
+                            requirements['includeUppercaseLetters'] = true;
+                            asciiCodes = asciiCodes.concat(getASCIICodesFor('uppercaseLetters'));
+                            break;
+
+                        case input.id.includes('Numbers'):
+                            requirements['includeNumbers'] = true;
+                            asciiCodes = asciiCodes.concat(getASCIICodesFor('numbers'));
+                            break;
+
+                        case input.id.includes('SpecialCharacters'):
+                            requirements['includeSpecialCharacters'] = true;
+                            asciiCodes = asciiCodes.concat(getASCIICodesFor('specialCharacters'));
+                            break;
+                    }
+                }
+            });
+
+    const chars = asciiCodes.map(charCode => String.fromCharCode(charCode));
+    const passwordLength = parseInt(document.getElementById('setCharacterLength').value);
+    let password;
+
+    do {
+        password = '';
+
+        for (let i = 0; i < passwordLength; i++) {
+            const randomIndex = getRandomNumberFromRange(0, chars.length - 1);
+            password += chars[randomIndex];
+        }
+    } while (!isPasswordValid(password, requirements));
+
+    return password;
+}
+
+function isPasswordValid(password, requirements) {
+    if (requirements.includeUppercaseLetters && !stringContainsUppercaseLetters(password)) {
+        return false;
+    }
+    if (requirements.includeNumbers && !stringContainsNumbers(password)) {
+        return false;
+    }
+    if (requirements.includeSpecialCharacters && !stringContainsSpecialCharacters(password)) {
+        return false;
+    }
+    return true;
+}
+
+function stringContainsSpecialCharacters(str) {
+    for (let i = 0; i < str.length; i++) {
+        if (!stringContainsLowercaseLetters(str[i])
+            && !stringContainsUppercaseLetters(str[i])
+            && !stringContainsNumbers(str[i])) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function stringContainsNumbers(str) {
+    return /\d/.test(str);
+}
+
+function stringContainsUppercaseLetters(str) {
+    return /[A-Z]/.test(str);
+}
+
+function stringContainsLowercaseLetters(str) {
+    return /[a-z]/.test(str);
+}
+
+function getRandomNumberFromRange(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function getASCIICodesFor(charType) {
+    switch(charType) {
+        case 'lowercaseLetters':
+            return createArrayFromRange(97, 122);
+        case 'uppercaseLetters':
+            return createArrayFromRange(65, 90);
+        case 'numbers':
+            return createArrayFromRange(48, 57);
+        case 'specialCharacters':
+            return createArrayFromRange(32, 47).concat(
+                createArrayFromRange(58, 64),
+                createArrayFromRange(91, 96),
+                createArrayFromRange(123, 126));
+        default:
+            return [];
+    }
+}
+
+function createArrayFromRange(min, max) {
+    const array = [];
+
+    for (let i = min; i <= max; i++) {
+        array.push(i);
+    }
+
+    return array;
+}
 
 function displayPasswordStrength() {
     // reset colored bars
