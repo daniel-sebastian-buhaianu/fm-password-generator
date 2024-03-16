@@ -144,11 +144,17 @@ form .result .text {
   font-size: 24px;
   line-height: 31px;
 }
+form .result .text.smaller {
+  font-size: 18px;
+}
 form .result .icon {
   cursor: pointer;
 }
 form .result .icon:hover path {
   fill: #E6E5EA;
+}
+form .result.active .text {
+  color: #E6E5EA;
 }
 form .settings {
   margin-bottom: 32px;
@@ -295,6 +301,9 @@ form .call-to-action .text {
   }
   form .result .text {
     font-size: 32px;
+  }
+  form .result .text.smaller {
+    font-size: 30px;
   }
   form .settings .length .container {
     margin-bottom: 16px;

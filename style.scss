@@ -30,6 +30,9 @@ form {
             font-weight: bold;
             font-size: 24px;
             line-height: 31px;
+            &.smaller {
+                font-size: 18px;
+            }
         }
         .icon {
             cursor: pointer;
@@ -37,6 +40,11 @@ form {
                 path {
                     fill: #E6E5EA;
                 }
+            }
+        }
+        &.active {
+            .text {
+                color: #E6E5EA;
             }
         }
     }
@@ -188,6 +196,9 @@ form {
         .result {
             .text {
                 font-size: 32px;
+                &.smaller {
+                    font-size: 30px;
+                }
             }
         }
         .settings {

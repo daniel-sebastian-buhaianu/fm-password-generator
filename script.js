@@ -17,9 +17,44 @@ document.querySelectorAll('form input[type="checkbox"]')
 document.querySelector('form')
         .addEventListener('submit', function(event) {
             event.preventDefault();
+
             const password = generatePassword();
-            console.log(password);
+
+            displayPassword(password);
         });
+
+
+function displayPassword(password) {
+    const passwordContainer = document.querySelector('form .result');
+
+    passwordContainer.querySelector('.text').innerText = password;
+
+    addClass('active', passwordContainer);
+
+    if (window.outerWidth < 768 && password.length > 19
+        || window.outerWidth >= 768 && password.length > 23) {
+        addClass('smaller', passwordContainer.querySelector('.text'));
+    } else {
+        removeClass('smaller', passwordContainer.querySelector('.text'));
+    }
+}
+
+
+function removeClass(_class, element) {
+    if (hasClass(_class, element)) {
+        element.className = element.className.replace(_class, '');
+    }
+}
+
+function addClass(_class, element) {
+    if (!hasClass(_class, element)) {
+        element.className = element.className + ' ' + _class;
+    }
+}
+
+function hasClass(_class, element) {
+    return element.className.includes(_class);
+}
 
 function generatePassword() {
     let asciiCodes = getASCIICodesFor('lowercaseLetters');
@@ -63,12 +98,12 @@ function generatePassword() {
             const randomIndex = getRandomNumberFromRange(0, chars.length - 1);
             password += chars[randomIndex];
         }
-    } while (!isPasswordValid(password, requirements));
+    } while (!passwordIsValid(password, requirements));
 
     return password;
 }
 
-function isPasswordValid(password, requirements) {
+function passwordIsValid(password, requirements) {
     if (requirements.includeUppercaseLetters && !stringContainsUppercaseLetters(password)) {
         return false;
     }
