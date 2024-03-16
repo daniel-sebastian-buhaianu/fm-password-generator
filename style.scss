@@ -130,12 +130,18 @@ form {
             .bars {
                 display: flex;
                 .bar {
+                    --colored-border-color: #E6E5EA;
+                    --colored-background-color: #18171F;
                     width: 10px;
                     height: 28px;
                     border: 2px solid #E6E5EA;
                     margin-right: 8px;
                     &:last-of-type {
                         margin-right: 0;
+                    }
+                    &.colored {
+                        border-color: var(--colored-border-color);
+                        background-color: var(--colored-background-color);
                     }
                 }
             }

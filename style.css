@@ -241,6 +241,8 @@ form .feedback .rating .bars {
   display: flex;
 }
 form .feedback .rating .bars .bar {
+  --colored-border-color: #E6E5EA;
+  --colored-background-color: #18171F;
   width: 10px;
   height: 28px;
   border: 2px solid #E6E5EA;
@@ -248,6 +250,10 @@ form .feedback .rating .bars .bar {
 }
 form .feedback .rating .bars .bar:last-of-type {
   margin-right: 0;
+}
+form .feedback .rating .bars .bar.colored {
+  border-color: var(--colored-border-color);
+  background-color: var(--colored-background-color);
 }
 form .call-to-action {
   width: 100%;

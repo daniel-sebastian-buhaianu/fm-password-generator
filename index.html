@@ -23,38 +23,31 @@
                     <div class="length">
                         <div class="container">
                             <p class="title">Character Length</p>
-                            <p class="number">10</p>
+                            <p class="number" id="characterLength"></p>
                         </div>
-                        <input type="range">
+                        <input id="setCharacterLength" type="range" min="6" max="24">
                     </div>
 
                     <ul class="format">
                         <li>
-                            <label for="uppercaseLetters">
-                                <input type="checkbox" name="uppercaseLetters" id="uppercaseLetters">
+                            <label for="includeUppercaseLetters">
+                                <input type="checkbox" id="includeUppercaseLetters">
                                 <span class="checkmark"></span>
                                 Include Uppercase Letters
                             </label>
                         </li>
                         <li>
-                            <label for="lowercaseLetters">
-                                <input type="checkbox" name="lowercaseLetters" id="lowercaseLetters">
-                                <span class="checkmark"></span>
-                                Include Lowercase Letters
-                            </label>
-                        </li>
-                        <li>
-                            <label for="numbers">
-                                <input type="checkbox" name="numbers" id="numbers">
+                            <label for="includeNumbers">
+                                <input type="checkbox" id="includeNumbers">
                                 <span class="checkmark"></span>
                                 Include Numbers
                             </label>
                         </li>
                         <li>
-                            <label for="symbols">
-                                <input type="checkbox" name="symbols" id="symbols">
+                            <label for="includeSpecialCharacters">
+                                <input type="checkbox" id="includeSpecialCharacters">
                                 <span class="checkmark"></span>
-                                Include Symbols
+                                Include Special Characters
                             </label>
                         </li>
                     </ul>
