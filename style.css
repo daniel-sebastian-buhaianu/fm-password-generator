@@ -143,18 +143,36 @@ form .result .text {
   font-weight: bold;
   font-size: 24px;
   line-height: 31px;
+  overflow: auto;
+  white-space: nowrap;
 }
-form .result .text.smaller {
-  font-size: 18px;
+form .result .copy {
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
 }
-form .result .icon {
+form .result .copy .text {
+  color: #A4FFAF;
+  text-transform: uppercase;
+  margin-right: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  display: none;
+}
+form .result .copy .text.visible {
+  display: block;
+}
+form .result .copy .icon {
   cursor: pointer;
 }
-form .result .icon:hover path {
+form .result .copy .icon:hover path {
   fill: #E6E5EA;
 }
 form .result.active .text {
   color: #E6E5EA;
+}
+form .result.active .copy .text {
+  color: #A4FFAF;
 }
 form .settings {
   margin-bottom: 32px;
@@ -302,8 +320,8 @@ form .call-to-action .text {
   form .result .text {
     font-size: 32px;
   }
-  form .result .text.smaller {
-    font-size: 30px;
+  form .result .copy {
+    margin-left: 16px;
   }
   form .settings .length .container {
     margin-bottom: 16px;

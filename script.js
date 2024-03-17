@@ -2,27 +2,33 @@
 
 window.addEventListener('load', function() {
     updateCharacterLength();
+
     displayPasswordStrength();
+
+    document.getElementById('setCharacterLength')
+            .addEventListener('input', function() {
+                updateCharacterLength();
+                displayPasswordStrength();
+            });
+
+    document.querySelectorAll('form input[type="checkbox"]')
+            .forEach(input => input.addEventListener('input', displayPasswordStrength));
+
+    document.querySelector('form')
+            .addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                displayPassword(generatePassword());
+            });
+
+    document.querySelector('form .result .copy .icon')
+            .addEventListener('click', function() {
+                const password = document.querySelector('form .result .text').innerText;
+
+                navigator.clipboard.writeText(password)
+                    .then(() => addClass('visible', this.previousElementSibling));
+            });
 });
-
-document.getElementById('setCharacterLength')
-        .addEventListener('input', function() {
-            updateCharacterLength();
-            displayPasswordStrength();
-        });
-
-document.querySelectorAll('form input[type="checkbox"]')
-        .forEach(input => input.addEventListener('input', displayPasswordStrength));
-
-document.querySelector('form')
-        .addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const password = generatePassword();
-
-            displayPassword(password);
-        });
-
 
 function displayPassword(password) {
     const passwordContainer = document.querySelector('form .result');
@@ -30,15 +36,8 @@ function displayPassword(password) {
     passwordContainer.querySelector('.text').innerText = password;
 
     addClass('active', passwordContainer);
-
-    if (window.outerWidth < 768 && password.length > 19
-        || window.outerWidth >= 768 && password.length > 23) {
-        addClass('smaller', passwordContainer.querySelector('.text'));
-    } else {
-        removeClass('smaller', passwordContainer.querySelector('.text'));
-    }
+    removeClass('visible', passwordContainer.querySelector('.copy .text'));
 }
-
 
 function removeClass(_class, element) {
     if (hasClass(_class, element)) {
