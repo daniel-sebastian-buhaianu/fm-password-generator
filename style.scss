@@ -30,13 +30,39 @@ form {
             font-weight: bold;
             font-size: 24px;
             line-height: 31px;
+            overflow: auto;
+            white-space: nowrap;
         }
-        .icon {
-            cursor: pointer;
-            &:hover {
-                path {
-                    fill: #E6E5EA;
+        .copy {
+            display: flex;
+            align-items: center;
+            margin-left: 8px;
+            .text {
+                color: #A4FFAF;
+                text-transform: uppercase;
+                margin-right: 8px;
+                font-size: 16px;
+                font-weight: bold;
+                display: none;
+                &.visible {
+                    display: block;
                 }
+            }
+            .icon {
+                cursor: pointer;
+                &:hover {
+                    path {
+                        fill: #E6E5EA;
+                    }
+                }
+            }
+        }
+        &.active {
+            .text {
+                color: #E6E5EA;
+            }
+            .copy .text {
+                color: #A4FFAF;
             }
         }
     }
@@ -130,12 +156,18 @@ form {
             .bars {
                 display: flex;
                 .bar {
+                    --colored-border-color: #E6E5EA;
+                    --colored-background-color: #18171F;
                     width: 10px;
                     height: 28px;
                     border: 2px solid #E6E5EA;
                     margin-right: 8px;
                     &:last-of-type {
                         margin-right: 0;
+                    }
+                    &.colored {
+                        border-color: var(--colored-border-color);
+                        background-color: var(--colored-background-color);
                     }
                 }
             }
@@ -182,6 +214,9 @@ form {
         .result {
             .text {
                 font-size: 32px;
+            }
+            .copy {
+                margin-left: 16px;
             }
         }
         .settings {
