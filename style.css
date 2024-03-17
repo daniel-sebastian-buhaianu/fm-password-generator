@@ -145,6 +145,10 @@ form .result .text {
   line-height: 31px;
   overflow: auto;
   white-space: nowrap;
+  scrollbar-width: none;
+}
+form .result .text::-webkit-scrollbar {
+  display: none;
 }
 form .result .copy {
   display: flex;
